@@ -6,6 +6,7 @@ import {EnvironmentService} from "./environment-service";
 import {MaterialsService} from "./materials-service";
 import {SetupMainScene} from "./setup-main-scene";
 
+
 export const createScene = async (canvas): Promise<BABYLON.Scene> => {
     const engine = new EngineService(canvas).getEngine();
     const scene = new BABYLON.Scene(engine);
@@ -30,13 +31,6 @@ export const createScene = async (canvas): Promise<BABYLON.Scene> => {
     //////Optimization
     scene.cleanCachedTextureBuffer();
 
-    scene.debugLayer.show({
-        globalRoot: document.body,
-        overlay: true,
-    });
-
-
-
     document.onkeyup = function (e) {
         const evt = window.event || e;
         //console.log(evt.keyCode);
@@ -53,8 +47,10 @@ export const createScene = async (canvas): Promise<BABYLON.Scene> => {
         }
     };
     engine.runRenderLoop(() => {
+        document.querySelector('.fps').innerHTML = engine.getFps().toFixed() + " fps";
         scene.render();
     });
+
     window.addEventListener('resize', () => {
         engine.resize();
     });
