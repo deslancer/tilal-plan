@@ -23,7 +23,7 @@ export const createScene = async (canvas): Promise<BABYLON.Scene> => {
     materialService.createBackgroundMaterial();
     materialService.createDynamicSky();
     envService.createSkyBox();
-    envService.createHDREnvironment();
+   // envService.createHDREnvironment();
 
     setupMainScene.setGroundTexture();
 

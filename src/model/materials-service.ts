@@ -21,7 +21,9 @@ export class MaterialsService implements IMaterialService{
 	createDynamicSky(){
 		const skyboxMaterial = new Materials.SkyMaterial("skyMaterial", this.scene);
 		skyboxMaterial.backFaceCulling = false;
+		skyboxMaterial.inclination = 0;
 		this.dynamicSky = skyboxMaterial;
+
 	}
 
 	setupExistsMaterials() {
