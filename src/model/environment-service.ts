@@ -1,6 +1,7 @@
 import * as BABYLON from 'babylonjs';
 import type { ILoaderService } from "../interfaces/ILoaderService"
 import type { MaterialsService } from './materials-service';
+import {VolumetricFogPluginMaterial} from "./VolumetricFog";
 
 
 export class EnvironmentService {
@@ -11,6 +12,7 @@ export class EnvironmentService {
 		this.scene = scene;
 		this.materialService = materials;
 		this.loaderService = loaderService;
+
 	}
 
 	createHDREnvironment(): void {
@@ -84,5 +86,10 @@ export class EnvironmentService {
 		this.scene.fogColor = new BABYLON.Color3(0.9, 0.9, 0.85);
 		this.scene.fogDensity = 0.001;
 	}
-
+	createVolumetricFog(){
+		BABYLON.RegisterMaterialPlugin("VolumetricFog", (material) => {
+			material.volumetricFog = new VolumetricFogPluginMaterial(material);
+			return material.volumetricFog;
+		});
+	}
 }

@@ -3,7 +3,7 @@ import * as BABYLON from 'babylonjs';
 export class CameraService {
 	private readonly canvas: any;
 	private readonly scene: any;
-	camera: BABYLON.ArcRotateCamera;
+	camera: any;
 	constructor( canvas, scene ) {
 		this.canvas = canvas;
 		this.scene = scene;

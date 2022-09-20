@@ -17,17 +17,19 @@ export const createScene = async (canvas): Promise<BABYLON.Scene> => {
     const setupMainScene = new SetupMainScene(loaderService, scene);
 
     scene.clearColor = new BABYLON.Color4(1.0, 1.0, 1.0, 1.0).toLinearSpace();
-    cameraService.createPerspectiveCam();
+    const camera = cameraService.createPerspectiveCam();
 
     loaderService.loadAll();
     materialService.createBackgroundMaterial();
     materialService.createDynamicSky();
     envService.createSkyBox();
+    envService.createVolumetricFog();
    // envService.createHDREnvironment();
 
     setupMainScene.setGroundTexture();
-
-
+    const mb = new BABYLON.MotionBlurPostProcess('mb', scene, 1.0, camera);
+    mb.motionStrength = 0.5;
+    mb.isObjectBased = true;
     //////Optimization
     scene.cleanCachedTextureBuffer();
 
